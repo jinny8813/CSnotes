@@ -306,3 +306,30 @@ Spooling（Simultaneous Peripheral Operations On-Line）是一種將I/O操作排
 ### 就OS而言，沒有差異
 即是將一個core視為一個logical CPU
 
+
+## 分散式系統（Distributed System）
+### 定義
+分散式系統是一種由多個獨立的計算機組成的系統，這些計算機通過網絡互聯並協同工作，對外表現為一個統一的整體。這些計算機（或節點）協同處理任務和共享資源，旨在提高系統的性能、可靠性和可擴展性。又稱Loosely-coupled system
+### 特點
+1. 地理分佈：系統中的節點可以分佈在不同的地理位置，通過網絡進行通信和協同工作。
+2. 資源共享：節點之間可以共享硬件、軟件和數據資源，提高資源利用率和系統效率。
+3. 並行處理：多個節點可以並行執行任務，提升計算能力和性能。
+4. 容錯性：系統具備較強的容錯能力，某個節點發生故障時，其他節點可以接管其工作，保證系統的連續運行。
+5. 透明性：分散式系統試圖對用戶隱藏其分佈性，使得用戶感覺是在與單一系統交互。
+6. 多部機器彼此透過Network互相串連
+7. 每部機器的CPU有各自的Memory, Bus, I/O device...，並非共享上述資源
+8. 各CPU的clock時脈控制不一定相同
+9. 各CPU的OS也不一定相同
+10. 各processors間溝通大多採Message passing方式
+	1. 建立communication link
+	2. massage相互傳輸
+	3. release link
+![[Pasted image 20240713065035.png]]
+### 優點
+1. 高可用性和可靠性(increased thoughput & increased reliability)：系統可以容忍部分節點的故障而不影響整體運行，提高了系統的可靠性和可用性。(同multiprocessors支持parallel computing)
+2. 可擴展性：可以通過增加更多的節點來擴展系統的計算能力和存儲容量，滿足日益增長的需求。
+3. 成本效益(resource sharing->cost down)：可以使用多個低成本的計算機代替單一昂貴的高性能計算機，降低總體成本。支持client-server computing model的實施
+	1. server: 提供服務
+	2. client: 需要某些服務時發request給server，server服務完成回傳response給client
+	3. peer to peer model: 同時具server和client角色
+4. 地理分佈的處理能力(remote site communication)：適合於需要分佈式處理的大規模數據分析和計算，如雲計算、網格計算和邊緣計算。
