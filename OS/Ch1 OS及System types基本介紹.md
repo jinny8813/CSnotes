@@ -331,5 +331,5 @@ Spooling（Simultaneous Peripheral Operations On-Line）是一種將I/O操作排
 3. 成本效益(resource sharing->cost down)：可以使用多個低成本的計算機代替單一昂貴的高性能計算機，降低總體成本。支持client-server computing model的實施
 	1. server: 提供服務
 	2. client: 需要某些服務時發request給server，server服務完成回傳response給client
-	3. peer to peer model: 同時具server和client角色
+	3. peer to peer model: 
 4. 地理分佈的處理能力(remote site communication)：適合於需要分佈式處理的大規模數據分析和計算，如雲計算、網格計算和邊緣計算。
