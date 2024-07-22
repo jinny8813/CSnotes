@@ -333,3 +333,32 @@ Spooling（Simultaneous Peripheral Operations On-Line）是一種將I/O操作排
 	2. client: 需要某些服務時發request給server，server服務完成回傳response給client
 	3. peer to peer model: 
 4. 地理分佈的處理能力(remote site communication)：適合於需要分佈式處理的大規模數據分析和計算，如雲計算、網格計算和邊緣計算。
+
+## Real-Time System(即時系統)
+### 硬即時系統（Hard Real-Time System）
+#### 定義
+硬即時系統是指那些必須在嚴格的時間限制內完成任務的系統。如果系統未能在指定的時間內完成任務，則會導致嚴重的後果或系統失敗。
+#### 例子
+航空控制系統、醫療設備
+#### 設計考量
+1. 確定性：系統必須確保所有任務在其時間限制內完成，無論工作負載如何變化。
+2. 優先級調度：任務的調度必須基於優先級，以確保最關鍵的任務優先完成。
+3. 時間預測：必須能夠精確預測每個任務的執行時間，以確保所有任務都能在時間限制內完成。就CPU scheduling設計，須優先考量schedulable與否，再進行排程
+4. 可靠性和安全性：系統必須高度可靠，並具有冗餘和容錯機制，以應對硬件或軟件故障。
+5. time-sharing system無法與之並存
+6. OS造成的Dispatch latency應降低(盡量減少karnel之干預介入時間)一般幾乎沒有OS，尤其是embedded real-time system(因為體積要小)
+7. 現行商用OS不支援Hard Real-Time features
+### 軟即時系統（Soft Real-Time System）
+#### 定義
+軟即時系統是指那些希望在時間限制內完成任務，但偶爾的時間超過並不會導致嚴重後果的系統。這些系統可以容忍一定程度的延遲，但延遲應該是可控的和最小化的。
+#### 例子
+多媒體系統、網絡數據傳輸
+#### 設計考量
+1. 優化平均響應時間：系統應該優化平均響應時間，而不是保證每次都在嚴格的時間限制內完成任務。就CPU scheduling設計，必須支持preemptive priority scheduling，且不可提供Aging技術 
+2. 資源管理：動態分配系統資源以適應不同負載，確保大多數情況下的高效運行。
+3. 質量控制：採用質量控制技術，如抖動緩衝和錯誤恢復，以最小化時間延遲對系統性能的影響。
+4. 靈活調度：使用靈活的調度策略，如公平排隊（Fair Queuing）或加權公平排隊（Weighted Fair Queuing），以平衡各任務的需求。
+5. OS造成的Dispatch latency應降低
+6. 可支援Virtual memory並存，但是要求real-time process 的全部pages鱉必須待在memory直到完工
+7. time-sharing system可與之並存(Real-Time採premptive priority，其他可採RR)
+8. 一般商用OS支援Soft Real-Time features
